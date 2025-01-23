@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Utilisez les credentials Docker Hub configurés dans Jenkins
-        DOCKER_HUB_CREDENTIALS = credentials('salah3779777/jenkinse')
+        DOCKER_HUB_CREDENTIALS = credentials('salah3779777-jenkinse')
     }
 
     stages {
@@ -32,9 +32,11 @@ pipeline {
                 script {
                     // Déployer l'application sur Kubernetes
                     sh """
-                        kubectl apply -f k8s-deployment.yaml
-                        kubectl apply -f k8s-service.yaml
-                    """
+               		export BUILD_ID=${env.BUILD_ID}
+                	envsubst < k8s-deployment.yaml > k8s-deployment-substituted.yaml
+               	 	kubectl apply -f k8s-deployment-substituted.yaml
+                	kubectl apply -f k8s-service.yaml
+            	    """
                 }
             }
         }
