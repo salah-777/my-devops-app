@@ -34,8 +34,8 @@ pipeline {
                     sh """
                         export BUILD_ID=${env.BUILD_ID}
                         envsubst < k8s-deployment.yaml > k8s-deployment-substituted.yaml
-                        kubectl apply -f k8s-deployment-substituted.yaml
-                        kubectl apply -f k8s-service.yaml
+                        kubectl apply --validate=false -f k8s-deployment-substituted.yaml
+                        kubectl apply --validate=false -f k8s-service.yaml
                     """
                 }
             }
