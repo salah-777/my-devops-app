@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Utilisez les credentials Docker Hub configurés dans Jenkins
-        DOCKER_HUB_CREDENTIALS = credentials('salah3779777-jenkinse')
+        DOCKER_HUB_CREDENTIALS = credentials('salah3779777/jenkinse')
     }
 
     stages {
