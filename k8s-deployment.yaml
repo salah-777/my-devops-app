@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: my-devops-app
-        image: salah3779777/my-devops-app:${BUILD_ID}
+        image: salah3779777/my-devops-app:$BUILD_ID
         ports:
         - containerPort: 5000

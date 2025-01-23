@@ -28,17 +28,16 @@ pipeline {
         }
 
         stage('Deploy to Kubernetes') {
-            steps {
-                script {
-                    // Déployer l'application sur Kubernetes
-                    sh """
-               		export BUILD_ID=${env.BUILD_ID}
-                	envsubst < k8s-deployment.yaml > k8s-deployment-substituted.yaml
-               	 	kubectl apply -f k8s-deployment-substituted.yaml
+    	    steps {
+        	script {
+            	    sh """
+                	export BUILD_ID=${env.BUILD_ID}
+                	cat k8s-deployment.yaml | envsubst '\$BUILD_ID' > k8s-deployment-substituted.yaml
+                	kubectl apply -f k8s-deployment-substituted.yaml
                 	kubectl apply -f k8s-service.yaml
-            	    """
-                }
-            }
-        }
+           	    """
+        	}
+    	    }		
+	}
     }
 }
