@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        // Utilisez les credentials Docker Hub configurés dans Jenkinss
+        // Utilisez les credentials Docker Hub configurés dans Jenkins
         DOCKER_HUB_CREDENTIALS = credentials('jenkinse777')
     }
 
@@ -28,16 +28,17 @@ pipeline {
         }
 
         stage('Deploy to Kubernetes') {
-    	    steps {
-        	script {
-            	    sh """
-                	export BUILD_ID=${env.BUILD_ID}
-                	cat k8s-deployment.yaml | envsubst '\$BUILD_ID' > k8s-deployment-substituted.yaml
-                	kubectl apply -f k8s-deployment-substituted.yaml
-                	kubectl apply -f k8s-service.yaml
-           	    """
-        	}
-    	    }		
-	}
+            steps {
+                script {
+                    // Remplacer ${BUILD_ID} dans le fichier YAML
+                    sh """
+                        export BUILD_ID=${env.BUILD_ID}
+                        envsubst < k8s-deployment.yaml > k8s-deployment-substituted.yaml
+                        kubectl apply -f k8s-deployment-substituted.yaml
+                        kubectl apply -f k8s-service.yaml
+                    """
+                }
+            }
+        }
     }
 }
