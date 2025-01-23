@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Utilisez les credentials Docker Hub configurés dans Jenkins
-        DOCKER_HUB_CREDENTIALS = salah3779777-jenkinse
+        DOCKER_HUB_CREDENTIALS = credentials('salah3779777-jenkinse')
     }
 
     stages {
@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     // Pousser l'image Docker vers Docker Hub
-                    docker.withRegistry('https://registry.hub.docker.com', 'salah3779777-jenkinse') {
+                    docker.withRegistry('https://registry.hub.docker.com', 'DOCKER_HUB_CREDENTIALS') {
                         docker.image("salah3779777/my-devops-app:${env.BUILD_ID}").push()
                     }
                 }
