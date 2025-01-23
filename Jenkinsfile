@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        // Utilisez les credentials Docker Hub configurés dans Jenkinsss
+        // Utilisez les credentials Docker Hub configurés dans Jenkins
         DOCKER_HUB_CREDENTIALS = credentials('salah3779777/jenkinse')
     }
 
