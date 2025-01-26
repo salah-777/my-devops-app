@@ -3,10 +3,9 @@ kind: Service
 metadata:
   name: my-devops-app
 spec:
-  type: NodePort
+  type: LoadBalancer  # Changez NodePort en LoadBalancer
   ports:
-    - port: 80       # Port externe du service
+    - port: 80        # Port externe du service
       targetPort: 5000  # Port interne de l'application Flask
-      nodePort: 31223   # Port exposé sur le nœud Minikube
   selector:
     app: my-devops-app
