@@ -40,5 +40,15 @@ pipeline {
                 }
             }
         }
+
+	stage('Deploy Ingress') {
+		steps {
+		   script {
+	      sh "kubectl apply -f ingress.yaml"
+	         
+		}
+	    }
+	}
+
     }
 }

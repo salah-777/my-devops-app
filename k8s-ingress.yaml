@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: devops-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: devops.local
+    http:
+      paths:
+      - path: /my-devops-app
+        pathType: Prefix
+        backend:
+          service:
+            name: my-devops-app
+            port:
+              number: 80
+      - path: /new-devops-app
+        pathType: Prefix
+        backend:
+          service:
+            name: new-devops-app
+            port:
+              number: 80
